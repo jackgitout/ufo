@@ -17,21 +17,20 @@ Listing.destroy_all
     username: Faker::Name.unique.name,
     email: Faker::Internet.email,
     address:Faker::Address.full_address,
-    encrypted_password:Faker::Alphanumeric.alphanumeric(number: 8)
+    password:Faker::Alphanumeric.alphanumeric(number: 8)
   )
     user.save!
-  end
 
   (1..3).to_a.sample.times do
-    list = Listing.new(
+    listing = Listing.new(
       title: Faker::Food.vegetables,
       description: Faker::Food.description,
       category: Faker::Food.dish,
       quantity: (1..10).to_a.sample,
       unit_price:(1..10).to_a.sample,
-      expiry_date: 0,
+      expiry_date: Date.new(),
       user: User.all.sample
   )
     listing.save!
   end
-end
+ end

@@ -1,9 +1,11 @@
 <div class="card-product">
-  <%= render  %>
   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
   <div class="card-product-infos">
-    <h2>Product name</h2>
-    <p>Product description with <strong>relevant info</strong> only.</p>
+    <h2><%= item.listing.title %></h2>
+    <p>Quantity: <%= item.quantity %></p>
+    <p>Price: $<%= item.amount %></p>
+    <p>Category: <%= item.listing.category %></p>
+    <p>Seller: <%= item.listing.user.username %></p>
   </div>
 </div>
 

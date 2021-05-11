@@ -1,2 +1,7 @@
-<h1>OrderItems#my_cart</h1>
-<p>Find me in app/views/order_items/my_cart.html.erb</p>
+<% @order_items.each do |item| %>
+<%= render "shared/card-product", item: item %>
+<% end %>
+<%= simple_form_for([ @listing, @order_item ]) do |f| %>
+  <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
+  <%= f.submit "Add To Cart", method: :create %>
+<% end %>

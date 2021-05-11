@@ -10,9 +10,10 @@ class OrderItemsController < ApplicationController
     @order_item.amount = @order_item.quantity * @order_item.listing.unit_price
     @order_item.user = current_user
     if @order_item.save
-      redirect_to my_cart_path
+      redirect_to listing_path(@listing)
     else
-      render :new
+      @user = User.find(@listing.user_id)
+      render 'listings/show'
     end
   end
 

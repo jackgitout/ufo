@@ -2,14 +2,20 @@
   <div class="card-trip">
       <div class="card-trip-infos">
         <h2><%= @listing.title %>'s Market</h2>
+        <% if @listing.photo.attached? %>
+          <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
+        <% else %>
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+        <% end %>
         </div>
+
         <p><%=@listing.category%></p>
         <p><%=@listing.unit_price %></p>
         <p><%=@listing.quantity%></p>
         <p><%=@listing.description%></p>
         <p><%=@listing.expiry_date%></p>
         <%= simple_form_for([ @listing, @order_item ]) do |f| %>
-          <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
+          <%= f.input :quantity, collection: 1..@listing.quantity, prompt: "Select Quantity" %>
           <%= f.submit "Add To Cart", method: :create %>
         <% end %>
         <p>Farmer's details:<%= @user.username %></p>

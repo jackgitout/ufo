@@ -1,0 +1,26 @@
+<div class="container">
+  <div class ="form">
+    <div class="form-total">
+      <%= simple_form_for(@listing) do |f| %>
+      <div class="form-title">
+        <%= f.label :title%><br>
+        <%= f.text_field :title%><br><br>
+        <%= f.label :description%><br>
+        <%= f.text_field :description%><br><br>
+        <%= f.label :category%><br>
+        <%= f.text_field :category%><br><br>
+        <%= f.label :quantity%><br>
+        <%= f.text_field :quantity%><br><br>
+        <%= f.label :unit_price%><br>
+        <%= f.text_field :unit_price%><br><br>
+        <%= f.label :expiry_date%><br>
+        <%= f.text_field :expiry_date%><br><br>
+      </div>
+      <div class="button">
+        <%= f.submit "Add", class: "btn btn-primary"%>
+      </div>
+        <% end %>
+      </div>
+  </div>
+</div>
+

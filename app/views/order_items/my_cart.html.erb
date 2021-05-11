@@ -1,2 +1,4 @@
-<h1>OrderItems#my_cart</h1>
-<p>Find me in app/views/order_items/my_cart.html.erb</p>
+<h1>Here are your items in cart</h1>
+<% @order_items.each do |item| %>
+<%= render "shared/card-product", item: item %>
+<% end %>

@@ -8,10 +8,7 @@
         <p><%=@listing.quantity%></p>
         <p><%=@listing.description%></p>
         <p><%=@listing.expiry_date%></p>
+        <p>Farmer's details:<%= link_to @user.username,  user_listing_path(@listing) %></p>
       </div>
     </div>
-
-
-
-
 

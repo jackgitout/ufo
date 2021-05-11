@@ -5,12 +5,15 @@ class OrderItemsController < ApplicationController
 
   def create
     @order_item = OrderItem.new(order_item_params)
+    @listing = Listing.find(params[:listing_id])
+    @order_item.listing = @listing
+    @order_item.amount = @order_item.quantity * @order_item.listing.unit_price
     @order_item.save
   end
 
   private
 
   def order_item_params
-    params.require(:order_item).permit(:quantity, :amount, :user_id)
+    params.require(:order_item).permit(:quantity, :user_id)
   end
 end

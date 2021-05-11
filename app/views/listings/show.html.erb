@@ -10,6 +10,7 @@
         <p><%=@listing.expiry_date%></p>
         <%= simple_form_for([ @listing, @order_item ]) do |f| %>
           <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
+          <%= f.submit "Add To Cart", method: :create %>
         <% end %>
       </div>
     </div>

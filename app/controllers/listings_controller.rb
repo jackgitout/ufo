@@ -24,12 +24,9 @@ class ListingsController < ApplicationController
 
   def create
     @listing = Listing.new(listing_params)
-    if @listing.valid?
-      @listing.save
-      redirect_to listing_path(@listing)
-    else
-      render :new
-    end
+    @listing.user = current_user
+    @listing.save
+    redirect_to listings_path(@listing)
   end
 
   def edit
@@ -37,6 +34,7 @@ class ListingsController < ApplicationController
   end
 
   def update
+    @listing.user = current_user
     @list.update(listing_params)
     redirect_to listings_path(@listing)
   end

@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
@@ -9,9 +11,11 @@ class ListingsController < ApplicationController
   def show
     # using the set_listing
     @order_item = OrderItem.new
+    @user = User.find(@listing.user_id)
   end
 
-  def mylistings
+  def my_listings
+    @listings = Listing.where(user: current_user)
   end
 
   def new

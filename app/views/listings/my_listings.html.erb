@@ -1,0 +1,12 @@
+<div class="farmer">
+ <h2><%= current_user.username %>'s Market</h2>
+
+    <div class="listing">
+      <h4> Listings </h4>
+        <% @listings.each do |listing| %>
+          <div class="card-category">
+            <p><%= link_to listing.title, listing_path(@listing) %></p>
+          </div>
+        <% end %>
+      </div>
+</div>

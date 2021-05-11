@@ -12,10 +12,7 @@
           <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
           <%= f.submit "Add To Cart", method: :create %>
         <% end %>
+        <p>Farmer's details:<%= @user.username %></p>
       </div>
     </div>
-
-
-
-
 

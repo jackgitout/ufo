@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :listings do
     resources :order_items, only: [:create]
   end
-  resources :order_items, only: [:my_cart]
+  get '/my-listings', to: 'listings#my_listings'
 end

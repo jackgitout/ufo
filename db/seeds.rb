@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+require "open-uri"
 
 puts 'destroy old data'
 
@@ -19,7 +20,9 @@ Listing.destroy_all
     address:Faker::Address.full_address,
     password:Faker::Alphanumeric.alphanumeric(number: 8)
   )
+   if user.valid?
     user.save!
+  end
 
   (1..3).to_a.sample.times do
     listing = Listing.new(
@@ -31,6 +34,10 @@ Listing.destroy_all
       expiry_date: Date.new(),
       user: User.all.sample
   )
+    if listing.valid?
+    file = URI.open('https://source.unsplash.com/1600x900/?vegetables')
+    listing.photo.attach(io: file, filename: 'images.png', content_type: 'image/png')
     listing.save!
   end
  end
+end

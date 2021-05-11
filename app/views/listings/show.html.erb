@@ -2,7 +2,13 @@
   <div class="card-trip">
       <div class="card-trip-infos">
         <h2><%= @listing.title %>'s Market</h2>
+        <% if @listing.photo.attached? %>
+          <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
+        <% else %>
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+        <% end %>
         </div>
+
         <p><%=@listing.category%></p>
         <p><%=@listing.unit_price %></p>
         <p><%=@listing.quantity%></p>

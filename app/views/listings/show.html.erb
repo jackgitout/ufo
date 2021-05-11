@@ -8,6 +8,9 @@
         <p><%=@listing.quantity%></p>
         <p><%=@listing.description%></p>
         <p><%=@listing.expiry_date%></p>
+        <%= simple_form_for([ @listing, @order_item ]) do |f| %>
+          <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
+        <% end %>
       </div>
     </div>
 

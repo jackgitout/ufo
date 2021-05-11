@@ -8,6 +8,7 @@ class ListingsController < ApplicationController
 
   def show
     # using the set_listing
+    @order_item = OrderItem.new
   end
 
   def mylistings

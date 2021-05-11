@@ -1,19 +1,35 @@
-
-
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?organic,vegetables,farmer)">
   <h1>Welcome to <strong>U</strong>rban <strong>F</strong>armer <strong>O</strong>nline platform!</h1>
   <p>Find the freshest produce from your neighbhourhood grocers, support small local UFO'ers</p>
-  <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
+
+  <div class="group" align="center">
+    <% if user_signed_in? %>
+   <a class="btn btn-flat" href="/listings/new">List your crops!</a>
+   <% else %>
+   <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
+   <% end %>
+  </div>
+
+
+
 </div>
 
-
-
-<div class="listing">
-  <h4> Listings </h4>
-  <% @listings.each do |listing| %>
-  <div class="card-category" style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("<%= cl_image_path listing.photo.key%>")'>
-    <h4><%= link_to listing.title, listing_path(listing) %></h4>
+<div class="cards">
+<% @listings.each do |listing| %>
+<div class="card">
+    <% user = User.find(listing.user_id) %>
+    <%= user.username %>
+    <%= listing.expiry_date %>
+  <img class="card-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>")>
+  <div class="card-body">
+    <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
+    <p class="card-text">
+      <%= link_to listing.category, listing_path(listing) %>
+      $<%= listing.unit_price %>
+      <p><%= listing.description %></p>
+    </p>
   </div>
+</div>
   <% end %>
 </div>
 

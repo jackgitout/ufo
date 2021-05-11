@@ -8,7 +8,8 @@ class OrderItemsController < ApplicationController
     @listing = Listing.find(params[:listing_id])
     @order_item.listing = @listing
     @order_item.amount = @order_item.quantity * @order_item.listing.unit_price
-    @order_item.save
+    if @order_item.save
+      redirect_to listing_path(@listing)
   end
 
   private

@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
@@ -7,10 +9,12 @@ class ListingsController < ApplicationController
   end
 
   def show
-    # using the set_list
+    # using the set_listing
+    @user = User.find(@listing.user_id)
   end
 
-  def mylistings
+  def my_listings
+    @listings = Listing.where(user: current_user)
   end
 
   def new
@@ -28,7 +32,7 @@ class ListingsController < ApplicationController
   end
 
   def edit
-    # using the set_list
+    # using the set_listing
   end
 
   def update
@@ -38,11 +42,11 @@ class ListingsController < ApplicationController
 
   private
 
-  def list_params
+  def listing_params
     params.require(:listing).permit(:title, :category, :unit_price, :quantity, :description, :expiry_date)
   end
 
-  def set_list
-    @list = Listing.find(params[:id])
+  def set_listing
+    @listing = Listing.find(params[:id])
   end
 end

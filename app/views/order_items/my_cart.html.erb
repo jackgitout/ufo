@@ -2,3 +2,6 @@
 <% @order_items.each do |item| %>
 <%= render "shared/card-product", item: item %>
 <% end %>
+<%= simple_form_for([ @order_item, @order ]) do |f| %>
+  <%= f.submit "Add To Cart", method: :create %>
+<% end %>

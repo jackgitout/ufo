@@ -1,0 +1,11 @@
+<div class="container">
+      <div class="listing">
+      <h4> Listings </h4>
+      <% @listings.each do |listing| %>
+        <div class="card-category">
+          <h4><%= link_to listing.title, listing_path(listing) %></h4>
+        </div>
+      <% end %>
+    </div>
+  </div>
+

@@ -8,23 +8,24 @@
 
 require 'faker'
 require "open-uri"
+require 'pry-byebug'
 
 puts 'destroy old data'
 
-Listing.destroy_all
+User.destroy_all
 
-10.times do
+3.times do
   user = User.new(
     username: Faker::Name.unique.name,
     email: Faker::Internet.email,
     address:Faker::Address.full_address,
     password:Faker::Alphanumeric.alphanumeric(number: 8)
-  )
-   if user.valid?
-    user.save!
-  end
+    )
+  user.save!
+end
 
-  (1..3).to_a.sample.times do
+User.all.each do |user|
+  3.times do
     listing = Listing.new(
       title: Faker::Food.vegetables,
       description: Faker::Food.description,
@@ -32,12 +33,10 @@ Listing.destroy_all
       quantity: (1..10).to_a.sample,
       unit_price:(1..10).to_a.sample,
       expiry_date: Date.new(),
-      user: User.all.sample
-  )
-    if listing.valid?
-    file = URI.open('https://source.unsplash.com/1600x900/?vegetables')
-    listing.photo.attach(io: file, filename: 'images.png', content_type: 'image/png')
+      user: User.first
+    )
+    file = URI.open("https://source.unsplash.com/400x300/?#{listing.title}")
+    listing.photo.attach(io: file, filename: "#{listing.title}.png", content_type: 'image/png')
     listing.save!
   end
- end
 end

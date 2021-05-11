@@ -11,7 +11,7 @@
 <div class="listing">
   <h4> Listings </h4>
   <% @listings.each do |listing| %>
-  <div class="card-category" style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("<%= cl_image_path list.photo.key%>")'>
+  <div class="card-category" style='background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("<%= cl_image_path listing.photo.key%>")'>
     <h4><%= link_to listing.title, listing_path(listing) %></h4>
   </div>
   <% end %>

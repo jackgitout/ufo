@@ -8,7 +8,11 @@
         <p><%=@listing.quantity%></p>
         <p><%=@listing.description%></p>
         <p><%=@listing.expiry_date%></p>
-        <p>Farmer's details:<%= link_to @user.username,  user_listing_path(@listing) %></p>
+        <%= simple_form_for([ @listing, @order_item ]) do |f| %>
+          <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
+          <%= f.submit "Add To Cart", method: :create %>
+        <% end %>
+        <p>Farmer's details:<%= @user.username %></p>
       </div>
     </div>
 

@@ -10,6 +10,7 @@ class ListingsController < ApplicationController
 
   def show
     # using the set_listing
+    @order_item = OrderItem.new
     @user = User.find(@listing.user_id)
   end
 

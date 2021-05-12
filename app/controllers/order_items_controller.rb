@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   def my_cart
     @order_items = OrderItem.all
+    @order = Order.new
   end
   def create
     @order_item = OrderItem.new(order_item_params)

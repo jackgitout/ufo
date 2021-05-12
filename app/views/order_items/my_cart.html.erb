@@ -2,4 +2,7 @@
 <% @order_items.each do |item| %>
 <%= render "shared/card-product", item: item %>
 <% end %>
+<%= simple_form_for(@order) do |f| %>
+  <%= f.submit "Checkout", method: :create %>
+<% end %>
 

@@ -1,7 +1,7 @@
 require 'pry-byebug'
 
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
@@ -39,8 +39,13 @@ class ListingsController < ApplicationController
 
   def update
     @listing.user = current_user
-    @list.update(listing_params)
+    @listing.update(listing_params)
     redirect_to listings_path(@listing)
+  end
+
+  def destroy
+    @listing.destroy
+    redirect_to listings_path
   end
 
   private

@@ -10,6 +10,7 @@ class OrderItemsController < ApplicationController
     @order_item.amount = @order_item.quantity * @order_item.listing.unit_price
     if @order_item.save
       redirect_to listing_path(@listing)
+    end
   end
 
   private

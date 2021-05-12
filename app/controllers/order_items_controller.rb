@@ -1,13 +1,13 @@
 class OrderItemsController < ApplicationController
+  before_action :find_listing, only: [:create]
 
   def my_cart
-    @order_items = OrderItem.where(@order_id)
+    @order_items = OrderItem.where(order: [nil, false])
     @order = Order.new
   end
 
   def create
     @order_item = OrderItem.new(order_item_params)
-    @listing = Listing.find(params[:listing_id])
     @order_item.listing = @listing
     @order_item.amount = @order_item.quantity * @order_item.listing.unit_price
     @order_item.user = current_user
@@ -18,8 +18,22 @@ class OrderItemsController < ApplicationController
       render 'listings/show'
     end
   end
+
+  def destroy
+    @order_item = OrderItem.find(params[:id])
+    @order_item.destroy
+    redirect_to my_cart_path
+  end
+
   private
+
   def order_item_params
     params.require(:order_item).permit(:quantity, :user_id)
   end
+
+  def find_listing
+    @listing = Listing.find(params[:listing_id])
+  end
+
 end
+

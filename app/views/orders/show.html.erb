@@ -1,2 +1,18 @@
-<h1>Here is your transaction</h1>
-<%= @order.id %>
+<div class="container">
+
+  <h2>Transaction Confirmation</h2>
+
+  <p>
+    <% @order.order_items.each do |item| %>
+    <%= render "card-products", item: item %>
+    <% end %>
+  </p>
+
+  <h4>
+    TOTAL AMOUNT: $<%= @order.total_amounts %>
+  </h4>
+
+
+</div>
+
+

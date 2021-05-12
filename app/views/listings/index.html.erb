@@ -12,7 +12,7 @@
 </div>
 
 <div class="cards">
-  <% @listings.limit(6).each do |listing| %>
+  <% @listings.sample(6).each do |listing| %>
   <div class="card">
     <div class="row" style="padding: 4px;">
       <div class="col-sm-6">
@@ -50,7 +50,7 @@
     <h5>
       <strong>Crops from Super Grocer:
         <em>
-          <% @listings.where(user_id: 1).limit(1).each do |listing| %>
+          <% @listings.where(user_id: 11).limit(1).each do |listing| %>
           <% user = User.find(listing.user_id) %>
           <%= user.username %>
         </em>
@@ -62,7 +62,7 @@
   <div class="row" style="padding: 12px">
     <div class="col-lg 12">
       <div class="cards-small">
-        <% @listings.where(user_id: 1).limit(5).each do |listing| %>
+        <% @listings.where(user_id: 11).limit(5).each do |listing| %>
         <div class="card-small">
           <% if listing.photo.attached? %>
          <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">

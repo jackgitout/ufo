@@ -60,7 +60,12 @@
     <div class="col-lg-12" style="margin-top: 20px">
       <h5><strong>Meet the Grocer</strong></h5>
       <div class="card-product-big-avatar" style="min-height: 200px">
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+        <% user = User.find(@listing.user_id) %>
+        <% if user.avatar.attached? %>
+         <img class="image" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=user.avatar.key %>" href="/listing">
+         <% else %>
+          <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
+        <% end %>
         <div class="col-lg-12" style="background-color: white; border: grey 1px; margin-left: 10px">
           <% user = User.find(@listing.user_id) %>
           <h6><strong>Name: </strong><%= user.username %></h6>

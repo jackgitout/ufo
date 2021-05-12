@@ -1,12 +1,17 @@
-<div class="farmer">
- <h2><%= current_user.username %>'s Market</h2>
 
-    <div class="listing">
-      <h4> Listings </h4>
+  <h2><%= current_user.username %>'s Listings</h2>
+
+  <div class="row">
+
+  <div class="card">
+
         <% @listings.each do |listing| %>
-          <div class="card-category">
-            <p><%= link_to listing.title, listing_path(listing) %></p>
-          </div>
+        <% if listing.photo.attached? %>
+         <img class="image" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+         <% else %>
+          <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
+        <% end %>
+            <h5><%= link_to listing.title, listing_path(listing) %></h5>
           <div class="options">
           <div class="list-delete">
             <%= link_to "Delete",
@@ -17,7 +22,11 @@
             <div class="list-edit">
               <%= link_to "Edit", edit_listing_path(listing) %>
             </div>
-        </div>     
+        </div>
+
         <% end %>
       </div>
 </div>
+
+</div>
+

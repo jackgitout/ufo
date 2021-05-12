@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
       end
     end
       redirect_to order_path(@order)
-
   end
 
   private

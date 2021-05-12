@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ufo</title>
+  <title>UFO: Urban Farmer Online</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -12,9 +12,15 @@
 
 <body>
   <div class="container">
-  <%= render 'shared/navbar' %>
-  <%= render 'shared/flashes' %>
-  <%= yield %>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <%= yield %>
+
+    <p style="color: grey; text-align: center; margin: 100px">
+      <small>You've reached the end of the page</small>
+    </p>
+
+    <%= render 'shared/footer' %>
   </div>
 </body>
 </html>

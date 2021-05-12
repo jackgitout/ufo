@@ -1,16 +1,24 @@
-<% if @order_items.empty? %>
-  <h1>Your cart is empty.</h1>
-  <h2>🥕 aint gonna add themselves!</h2>
-  <% else %>
-  <h1>Here are your items in cart</h1>
-  <% @order_items.each do |item| %>
-  <%= render "shared/card-product", item: item %>
-  <% end %>
-  <%= simple_form_for(@order) do |f| %>
-    <% @order_items.each do |oi| %>
+<div class="row">
+  <div class="col-sm-12" style="text-align: center; margin-top: 30px">
+
+    <% if @order_items.empty? %>
+    <h2>Your cart is empty.</h2>
+    <h4>🥕 aint gonna add themselves!</h4>
+    <% else %>
+    <div class="col-sm-12" style="text-align: left; vertical-align: top">
+
+      <h2>Here are your items in cart</h2>
+      <% @order_items.each do |item| %>
+      <%= render "shared/card-product", item: item %>
+      <% end %>
+      <%= simple_form_for(@order) do |f| %>
+      <% @order_items.each do |oi| %>
       <%= f.hidden_field :order_item_ids, multiple: true, value: oi.id %>
-    <% end %>
-    <%= f.submit "Checkout", method: :create %>
-  <% end %>
-<% end %>
+      <% end %>
+      <%= f.submit "Checkout", method: :create, class: "btn btn-danger w-100" %>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 

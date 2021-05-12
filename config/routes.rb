@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :order_items, only: [:create]
   end
 
+  resources :order_items, only: [:destroy]
+
   resources :orders, only: [:index, :show, :create]
 
   get '/my-cart', to: 'order_items#my_cart'

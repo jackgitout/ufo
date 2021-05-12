@@ -7,6 +7,17 @@
           <div class="card-category">
             <p><%= link_to listing.title, listing_path(listing) %></p>
           </div>
+          <div class="options">
+          <div class="list-delete">
+            <%= link_to "Delete",
+            listing_path(listing),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+          </div>
+            <div class="list-edit">
+              <%= link_to "Edit", edit_listing_path(listing) %>
+            </div>
+        </div>
         <% end %>
       </div>
 </div>

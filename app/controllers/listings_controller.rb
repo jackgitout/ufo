@@ -14,7 +14,6 @@ class ListingsController < ApplicationController
     # end
 
     @listings = Listing.by_query(params[:search_query]).by_category(params[:category])
-    raise
   end
 
   def show

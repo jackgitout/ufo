@@ -2,4 +2,10 @@
 <% @order_items.each do |item| %>
 <%= render "shared/card-product", item: item %>
 <% end %>
+<%= simple_form_for(@order) do |f| %>
+  <% @order_items.each do |oi| %>
+    <%= f.hidden_field :order_item_ids, multiple: true, value: oi.id %>
+  <% end %>
+  <%= f.submit "Checkout", method: :create %>
+<% end %>
 

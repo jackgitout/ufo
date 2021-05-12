@@ -16,7 +16,7 @@
       <% if user_signed_in? %>
         <li class="nav-item active">
           <a href="/my-cart" class="btn btn-success">
-          My Cart <span class="badge badge-light"><%= current_user.order_items.count %></span>
+          My Cart <span class="badge badge-light"><%= current_user.order_items.select { |item|  item.order_id.nil? }.count %></span>
         </a>
         </li>
       <li class="nav-item dropdown ml-3">

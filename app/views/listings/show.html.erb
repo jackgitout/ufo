@@ -7,7 +7,7 @@
       <% if @listing.photo.attached? %>
       <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
       <% else %>
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+     <img class="image" src="https://source.unsplash.com/400x300/?vegetables"/>
       <% end %>
     </div>
 
@@ -64,7 +64,7 @@
         <% if user.avatar.attached? %>
          <img class="image" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=user.avatar.key %>" href="/listing">
          <% else %>
-          <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
+           <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
         <% end %>
         <div class="col-lg-12" style="background-color: white; border: grey 1px; margin-left: 10px">
           <% user = User.find(@listing.user_id) %>
@@ -85,8 +85,12 @@
         <% listings = Listing.where(user_id: @listing.user_id).limit(5) %>
         <% listings.each do |listing| %>
         <div class="card-small">
-         <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
-         <div class="card-small-body" style="vertical-align: text-bottom;">
+          <% if listing.photo.attached? %>
+            <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+          <% else %>
+            <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
+          <% end %>
+          <div class="card-small-body" style="vertical-align: text-bottom;">
           <strong><%= link_to listing.title, listing_path(listing) %></strong>
           <div class="card-small-text">
             <small><%= listing.category %></small>

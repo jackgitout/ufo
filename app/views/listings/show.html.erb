@@ -1,23 +1,101 @@
-<div class ="container">
-  <div class="card-trip">
-      <div class="card-trip-infos">
-        <h2><%= @listing.title %>'s Market</h2>
-        <% if @listing.photo.attached? %>
-          <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
-        <% else %>
-          <img src="https://source.unsplash.com/400x300/?vegetables" />
-        <% end %>
+
+<div class ="container" style="background-color: #F0F0F0; padding-top: 20px">
+
+  <div class="row">
+
+    <div class="image col-lg-6">
+      <% if @listing.photo.attached? %>
+      <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
+      <% else %>
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+      <% end %>
+    </div>
+
+    <div class="col-lg-6 col">
+      <h2><strong><%= @listing.title %></strong></h2>
+      <p>Category: <%=@listing.category%></p>
+      <hr>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <strong>Price:</strong>
         </div>
-          <p><%=@listing.category%></p>
-          <p><%=@listing.unit_price %></p>
-          <p><%=@listing.quantity%></p>
-          <p><%=@listing.description%></p>
-          <p><%=@listing.expiry_date%></p>
+        <div class="col-sm-10">
+          $<%=@listing.unit_price %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <strong>Expiry:</strong>
+        </div>
+        <div class="col-sm-10">
+          <%=@listing.expiry_date %>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 20px; margin-bottom: 30px">
+        <div class="col-sm-12">
           <%= simple_form_for([ @listing, @order_item ]) do |f| %>
-            <%= f.input :quantity, input_html: { min: 0, max: @listing.quantity, step: 1 } %>
-            <%= f.submit "Add To Cart", method: :create %>
+          <%= f.input :quantity, collection: 1..@listing.quantity, prompt: "Select Order Quantity", label: false %>
+          <%= f.submit "Add To Cart", method: :create %>
+          <small>(Quantity left: <%=@listing.quantity%>)</small>
           <% end %>
-        <p>Farmer's details:<%= @user.username %></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row mt-20">
+    <div class="col-sm-12" style="margin-top:20px">
+      <h5><strong>Description</strong></h5>
+      <p><%=@listing.description%></p>
+    </div>
+  </div>
+
+  <div class="row d-block">
+    <div class="col-lg-12" style="margin-top: 20px">
+      <h5><strong>Meet the Grocer</strong></h5>
+      <div class="card-product-big-avatar" style="min-height: 200px">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
+        <div class="col-lg-12" style="background-color: white; border: grey 1px; margin-left: 10px">
+          <% user = User.find(@listing.user_id) %>
+          <h6><strong>Name: </strong><%= user.username %></h6>
+          <h6><strong>Contact: </strong><%= user.email %></h6>
+          <h6><strong>Address: </strong><%= user.address %></h6>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 300px">
+
+    <div class="col-lg-12" style="margin-top: 20px">
+      <h5><strong>You may also like these</strong></h5>
+      <div class="cards-small">
+        <% user = User.find(@listing.user_id) %>
+        <% listings = Listing.where(user_id: @listing.user_id).limit(5) %>
+        <% listings.each do |listing| %>
+        <div class="card-small">
+         <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+         <div class="card-small-body" style="vertical-align: text-bottom;">
+          <strong><%= link_to listing.title, listing_path(listing) %></strong>
+          <div class="card-small-text">
+            <small><%= listing.category %></small>
+            <p>$<%= listing.unit_price %></p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+  get 'orders/show'
   root to: 'listings#index'
   devise_for :users
 
@@ -6,5 +8,6 @@ Rails.application.routes.draw do
   resources :listings do
     resources :order_items, only: [:create]
   end
+  get '/my-cart', to: 'order_items#my_cart'
   get '/my-listings', to: 'listings#my_listings'
 end

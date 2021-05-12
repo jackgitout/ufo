@@ -11,7 +11,6 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       redirect_to listing_path(@listing)
     end
-  end
 
   private
 

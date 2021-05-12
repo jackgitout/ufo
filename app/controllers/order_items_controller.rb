@@ -34,4 +34,6 @@ class OrderItemsController < ApplicationController
   def find_listing
     @listing = Listing.find(params[:listing_id])
   end
+
 end
+

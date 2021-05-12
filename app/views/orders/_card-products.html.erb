@@ -1,0 +1,15 @@
+<div class="card-product">
+  <img src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=item.listing.photo.key %>" />
+  <div class="card-product-infos d-flex flex-column flex-grow-1">
+    <div class="row d-flex flex-row justify-content-between align-items-center px-3">
+      <h2><%= item.listing.title %></h2>
+      <div class="box">
+        <p>Quantity: <%= item.quantity %></p>
+        <p>Price: $<%= item.amount %></p>
+      </div>
+    </div>
+    <p>Category: <%= item.listing.category %></p>
+    <p>Seller: <%= item.listing.user.username %></p>
+  </div>
+</div>
+

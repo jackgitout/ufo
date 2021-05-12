@@ -24,7 +24,11 @@
         <small>Order by:<%= listing.expiry_date %></small>
       </div>
     </div>
-    <img class="card-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+    <% if listing.photo.attached? %>
+      <img class="card-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+    <% else %>
+      <img class="card-img-top" src="https://source.unsplash.com/400x300/?vegetables" />
+    <% end %>
     <div class="card-body">
       <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
       <p class="card-text">

@@ -3,6 +3,13 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 5px;
   margin-top: 16px;
+}
+
+.cards-small {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 8px;
+  margin-top: 8px;
   margin-bottom: 400px;
 }
 

@@ -9,7 +9,6 @@
     <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
     <% end %>
   </div>
-
 </div>
 
 <div class="cards">
@@ -18,7 +17,7 @@
     <div class="row" style="padding: 4px;">
       <div class="col-sm-6">
         <% user = User.find(listing.user_id) %>
-        <img class="avatar" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png">
+          <img class="avatar" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png">
         <%= user.username %>
       </div>
       <div class="col-sm-6">
@@ -57,7 +56,11 @@
       <div class="cards-small">
         <% @listings.where(user_id: 1).limit(5).each do |listing| %>
         <div class="card-small">
+          <% if listing.photo.attached? %>
          <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+         <% else %>
+          <img class="card-small-img-top" src="https://source.unsplash.com/400x300/?vegetables" />
+        <% end %>
          <div class="card-small-body" style="vertical-align: text-bottom;">
           <strong><%= link_to listing.title, listing_path(listing) %></strong>
           <div class="card-small-text">

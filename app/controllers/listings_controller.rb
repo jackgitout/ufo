@@ -1,17 +1,18 @@
-require 'pry-byebug'
-
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @listings = Listing.all
+    if params[:search_query]
+      @listings = Listing.where("title LIKE ?", "%#{params[:search_query].titleize}%")
+    else
+      @listings = Listing.all
+    end
   end
 
   def show
     # using the set_listing
     @order_item = OrderItem.new
-    @user = User.find(@listing.user_id)
   end
 
   def my_listings

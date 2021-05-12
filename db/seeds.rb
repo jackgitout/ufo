@@ -8,13 +8,12 @@
 
 require 'faker'
 require "open-uri"
-require 'pry-byebug'
 
 puts 'destroy old data'
 
 User.destroy_all
 
-3.times do
+4.times do
   user = User.new(
     username: Faker::Name.unique.name,
     email: Faker::Internet.email,
@@ -25,11 +24,11 @@ User.destroy_all
 end
 
 User.all.each do |user|
-  3.times do
+  5.times do
     listing = Listing.new(
       title: Faker::Food.vegetables,
       description: Faker::Food.description,
-      category: Faker::Food.dish,
+      category: ["Fresh Vegetables", "Frozen Vegetables", "Ready To Eat Salads", "Grow Your Own Microgreens", "Other Vegetables"].sample,
       quantity: (1..10).to_a.sample,
       unit_price:(1..10).to_a.sample,
       expiry_date: Date.new(),

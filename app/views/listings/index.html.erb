@@ -17,7 +17,11 @@
     <div class="row" style="padding: 4px;">
       <div class="col-sm-6">
         <% user = User.find(listing.user_id) %>
-          <img class="avatar" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png">
+          <% if user.avatar.attached? %>
+            <img class="avatar" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=user.avatar.key %>">
+          <% else %>
+            <img class="avatar" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png">
+          <% end %>
         <%= user.username %>
       </div>
       <div class="col-sm-6">

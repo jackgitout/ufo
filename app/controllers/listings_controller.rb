@@ -5,11 +5,17 @@ class ListingsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    if params[:search_query]
-      @listings = Listing.where("title LIKE ?", "%#{params[:search_query].titleize}%")
-    else
-      @listings = Listing.all
-    end
+    # if params[:search_query]
+    #   @listings = Listing.where("title LIKE ?", "%#{params[:search_query].titleize}%")
+    # else
+    #   @listings = Listing.all
+    # end
+
+    # if params[:category]
+    #   @listings.where(category: params[:category])
+    # end
+
+    @listings = Listing.by_query(params[:search_query]).by_category(params[:category])
   end
 
   def show
@@ -52,6 +58,11 @@ class ListingsController < ApplicationController
   end
 
   private
+
+  def query_params
+    query_params = params[:query]
+    query_params ? query_params.permit(:text, :category) : {}
+  end
 
   def listing_params
     params.require(:listing).permit(:title, :category, :unit_price, :quantity, :description, :expiry_date, :photo)

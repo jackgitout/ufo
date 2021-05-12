@@ -8,11 +8,12 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order(order_params)
+    @order = Order.new(order_params)
+    raise
   end
 
   private
-  def order__params
+  def order_params
     params.require(:order).permit(:user_id)
   end
 end

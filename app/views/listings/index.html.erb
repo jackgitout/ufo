@@ -1,33 +1,79 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?organic,vegetables,farmer)">
   <h1>Welcome to <strong>U</strong>rban <strong>F</strong>armer <strong>O</strong>nline platform!</h1>
-  <p>Find the freshest produce from your neighbhourhood grocers, support small local UFO'ers</p>
+  <p>Find the freshest produce from your neighbhourhood grocers, support small local businesses</p>
 
   <div class="group" align="center">
     <% if user_signed_in? %>
-   <a class="btn btn-flat" href="/listings/new">List your crops!</a>
-   <% else %>
-   <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
-   <% end %>
+    <a class="btn btn-flat" href="/listings/new">List your crops!</a>
+    <% else %>
+    <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
+    <% end %>
   </div>
 
 </div>
 
 <div class="cards">
-<% @listings.each do |listing| %>
-<div class="card">
-    <% user = User.find(listing.user_id) %>
-    <%= user.username %>
-    <%= listing.expiry_date %>
-  <img class="card-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
-  <div class="card-body">
-    <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
-    <p class="card-text">
-      <%= link_to listing.category, listing_path(listing) %>
-      $<%= listing.unit_price %>
-      <p><%= listing.description %></p>
-    </p>
+  <% @listings.limit(6).each do |listing| %>
+  <div class="card">
+    <div class="row" style="padding: 4px;">
+      <div class="col-sm-6">
+        <% user = User.find(listing.user_id) %>
+        <img class="avatar" src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png">
+        <%= user.username %>
+      </div>
+      <div class="col-sm-6">
+        <small>Order by:<%= listing.expiry_date %></small>
+      </div>
+    </div>
+    <img class="card-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+    <div class="card-body">
+      <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
+      <p class="card-text">
+        <%= listing.category %>
+        $<%= listing.unit_price %>
+        <p><%= listing.description %></p>
+      </p>
+    </div>
   </div>
-</div>
   <% end %>
 </div>
+
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px">
+    <h5>
+      <strong>Crops from Super Grocer:
+        <em>
+          <% @listings.where(user_id: 1).limit(1).each do |listing| %>
+          <% user = User.find(listing.user_id) %>
+          <%= user.username %>
+        </em>
+        <% end %>
+      </strong>
+    </h5>
+  </div>
+
+  <div class="row" style="padding: 12px">
+    <div class="col-lg 12">
+      <div class="cards-small">
+        <% @listings.where(user_id: 1).limit(5).each do |listing| %>
+        <div class="card-small">
+         <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+         <div class="card-small-body" style="vertical-align: text-bottom;">
+          <strong><%= link_to listing.title, listing_path(listing) %></strong>
+          <div class="card-small-text">
+            <small><%= listing.category %></small>
+            <p>$<%= listing.unit_price %></p>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+
+
 

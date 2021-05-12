@@ -9,19 +9,21 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+
     if @order.save
       params[:order][:order_item_ids].each do |id|
         oi = OrderItem.find(id)
         oi.order = @order
         oi.save!
       end
+      redirect_to @order
     end
-      redirect_to order_path(@order)
-
   end
 
   private
   def order_params
     params.require(:order).permit(:user_id)
   end
+
+
 end

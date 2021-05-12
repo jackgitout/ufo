@@ -1,9 +1,10 @@
 class OrderItemsController < ApplicationController
 
   def my_cart
-    @order_items = OrderItem.all
+    @order_items = OrderItem.where(@order_id)
     @order = Order.new
   end
+
   def create
     @order_item = OrderItem.new(order_item_params)
     @listing = Listing.find(params[:listing_id])

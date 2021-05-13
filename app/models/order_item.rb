@@ -4,5 +4,5 @@ class OrderItem < ApplicationRecord
   belongs_to :user
 
   validates :quantity, exclusion: { in: [0],
-    message: "invalid, no items are added." } 
+    message: "invalid, no items are added." }
 end

@@ -10,6 +10,7 @@
 
 .card-body {
   height: 50%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 
 }
 
@@ -17,6 +18,8 @@
   background-color: white;
   height: 100%;
   vertical-align: bottom;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 15px 0 25px 0;
 }
 
 .card-small-img-top {

@@ -25,11 +25,11 @@
       <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
       <p class="card-text">
         <span class="row">
-          <span class="col-sm-8">
+          <span class="col-sm-7">
             <%= listing.category %>
           </span>
-          <span class="col-sm-4">
-            <strong>$<%= listing.unit_price %> each</strong>
+          <span class="col-sm-5" style="text-align: right">
+            $<%= listing.unit_price %> each
           </span>
         </span>
         <p><small><%= listing.description %></small></p>

@@ -8,14 +8,13 @@
     <% else %>
     <div class="col-sm-12" style="text-align: left; vertical-align: top;">
 
+      <!-- LIST ORDER ITEMS -->
       <h2>Here are your items in cart</h2>
       <% @order_items.each do |item| %>
       <%= render "shared/card-product", item: item %>
       <% end %>
-      <%= simple_form_for(@order) do |f| %>
-      <% @order_items.each do |oi| %>
-      <%= f.hidden_field :order_item_ids, multiple: true, value: oi.id %>
-      <% end %>
+
+      <!-- LIST TOTAL AMOUNT -->
       <div class="col-sm-12" style="background-color: grey; text-align: right; padding:8px">
         <h6>
           TOTAL AMOUNT:
@@ -26,6 +25,12 @@
           <%= total %>
         </h6>
       </div>
+
+      <!--       CHECKOUT -->
+      <%= simple_form_for(@order) do |f| %>
+      <% @order_items.each do |oi| %>
+        <%= f.hidden_field :order_item_ids, multiple: true, value: oi.id %>
+      <% end %>
       <%= f.submit "Checkout", method: :create, class: "btn btn-danger w-100" %>
       <% end %>
 

@@ -9,12 +9,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-
     if @order.save
       params[:order][:order_item_ids].each do |id|
         oi = OrderItem.find(id)
         oi.order = @order
-        oi.save!
+        listing = Listing.find(oi.listing.id)
+        listing.quantity = listing.quantity - oi.quantity
+        listing.save!
       end
       redirect_to @order
     end

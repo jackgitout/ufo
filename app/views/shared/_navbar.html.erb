@@ -32,7 +32,7 @@
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "List New Crops", "/listings/new", class: "dropdown-item" %>
             <%= link_to "All My Crop Listings", "/my-listings", class: "dropdown-item" %>
-            <%= link_to "My Transaction History", "#", class: "dropdown-item" %>
+            <%= link_to "My Transaction History", "/orders", class: "dropdown-item" %>
             <hr>
             <%= link_to "Edit Profile", "/users/edit", class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>

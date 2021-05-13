@@ -1,6 +1,6 @@
 <div class="card-product">
   <% if item.listing.photo.attached? %>
-      <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
+      <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=item.listing.photo.key %>" href="/listing">
       <% else %>
     <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
   <% end %>

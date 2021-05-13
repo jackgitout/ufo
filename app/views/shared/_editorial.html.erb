@@ -1,0 +1,117 @@
+
+
+<!-- BOTTOM RACK - featured editorial -->
+
+<hr>
+<h4>Feeling in need of inspiration?</h4>
+
+<!-- BOTTOM: EDITORIAL RACK#1 - freshest produce (latest add) -->
+
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px">
+    <h6><strong>Get 'em Farm to table!</strong></h6>
+    The freshest of our grocers' crops, any fresher you may have to harvest them yourselves!
+  </div>
+
+  <div class="row" style="padding: 12px">
+    <div class="col-lg 12">
+      <div class="cards-small">
+        <% @listings.last(5).each do |listing| %>
+        <div class="card-small">
+          <%= render "shared/listing-image", listing: listing %>
+          <%= render "shared/cards-of-5-rack", listing: listing %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM: EDITORIAL RACK#2 - featured category #1 -->
+
+<hr>
+<h4>Cream of the crop</h4>
+
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px">
+    <h6><strong>Ready to eat Salads</strong></h6>
+    For the busy meals on the go, here's some ready to eat salads prepared lovingly by your friendly neighborhood grocers.
+  </div>
+
+  <div class="row" style="padding: 12px">
+    <div class="col-lg 12">
+      <div class="cards-small">
+        <% @listings.where(category: "Ready To Eat Salads").each do |listing| %>
+        <div class="card-small">
+          <%= render "shared/listing-image", listing: listing %>
+          <%= render "shared/cards-of-5-rack", listing: listing %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM: EDITORIAL RACK#2 - featured category #2 -->
+
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px">
+    <h6><strong>Grow Your Own Microgreens</strong></h6>
+    Get your own growing kit to start your urban farm at the comfort of your home today!
+  </div>
+
+  <div class="row" style="padding: 12px">
+    <div class="col-lg 12">
+      <div class="cards-small">
+        <% @listings.where(category: "Grow Your Own Microgreens").each do |listing| %>
+        <div class="card-small">
+          <%= render "shared/listing-image", listing: listing %>
+          <%= render "shared/cards-of-5-rack", listing: listing %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- BOTTOM: EDITORIAL RACK#3 - super grocer -->
+
+<hr>
+<h4>Our Super Grocer</h4>
+
+<!-- BOTTOM: EDITORIAL RACK#3 - super grocer #1 -->
+
+<div class="row">
+  <div class="col-lg-12" style="margin-top: 20px">
+    <h6>
+      <strong>
+        Crops from Super Grocer:
+        <% listing = @listings.last %>
+        <% user = User.find(listing.user_id) %>
+        <%= user.username %>
+      </strong>
+    </h6>
+    One of our most passionate grocer, check out the excellent harvest!
+  </div>
+
+  <div class="row" style="padding: 12px">
+    <div class="col-lg 12" >
+      <div class="cards-small">
+        <% listing = @listings.last %>
+        <% user = User.find(listing.user_id) %>
+        <% @listings.where(user_id: user).limit(5).each do |listing|%>
+
+        <div class="card-small">
+          <%= render "shared/listing-image", listing: listing %>
+          <%= render "shared/cards-of-5-rack", listing: listing %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

@@ -1,0 +1,61 @@
+<!-- BANNER -->
+<div class="row">
+  <div class="col-sm-12">
+
+    <div id="Welcome" class="tabcontent" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?organic,vegetables,farmer)">
+      <h1>Welcome to <strong>U</strong>rban <strong>F</strong>armer <strong>O</strong>nline</h1>
+      <p>Find the freshest produce from your neighbhourhood grocers, support small local businesses</p>
+      <div class="group" align="center">
+        <% if user_signed_in? %>
+        <a class="btn btn-flat" href="/listings/new">List your crops!</a>
+        <% else %>
+        <a class="btn btn-flat" href="/users/sign_up">Sign Up Today!</a>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="Meatless Monday" class="tabcontent" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?vegetarian,food,cafe)">
+      <h1>Inspiration for Meatless Monday</h1>
+      <p>Support the global movement and go green!</p>
+    </div>
+
+    <div id="SHN Meals" class="tabcontent" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?home,chef,meals)">
+      <h1>Ideas for SHN Meals</h1>
+      <p>Quarantine at home? Not a problem! </p>
+      <p>Here's some ideas to ensure you ride through the journey!</p>
+    </div>
+
+    <div id="Go Wild" class="tabcontent" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://source.unsplash.com/1600x900/?mushroom,wild)">>
+      <h1>Go Wild (Mushrooms)</h1>
+      <p>Mushrooms!</p>
+    </div>
+
+  </div>
+</div>
+
+<button class="tablink" onclick="openTab('Welcome', this, 'red')" id="defaultOpen">Welcome to UFO!</button>
+<button class="tablink" onclick="openTab('Meatless Monday', this, 'green')">Meatless Monday</button>
+<button class="tablink" onclick="openTab('SHN Meals', this, 'blue')">Ideas for SHN Meals</button>
+<button class="tablink" onclick="openTab('Go Wild', this, 'orange')">Go Wild (Mushroom)</button>
+
+
+<script>
+  function openTab(tabName,elmnt,color) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].style.backgroundColor = "";
+    }
+    document.getElementById(tabName).style.display = "block";
+    elmnt.style.backgroundColor = color;
+
+  }
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+

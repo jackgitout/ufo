@@ -1,8 +1,37 @@
-<%= simple_form_for :search, url: root_path, method: :get do |f| %>
-  <div class="search-form-control form-group">
-    <input class="form-control string required" type="text" name="search[query]" id="search_query" />
-    <button name="button" type="submit" class="btn btn-flat">
-      <i class="fas fa-search"></i> Search
-    </button>
+<!--  ALL listings -->
+<div class="cards">
+  <% @listings.each do |listing| %>
+
+  <div class="card">
+
+    <div class="row" style="padding: 4px; align-items: center">
+      <div class="col-sm-7">
+        <% user = User.find(listing.user_id) %>
+        <%= render "shared/user-avatar", user: user %>
+        <small><%= user.username %></small>
+      </div>
+      <div class="col-sm-5">
+        <small>Order by:<%= listing.expiry_date %></small>
+      </div>
+    </div>
+
+    <%= render "shared/listing-image", listing: listing %>
+    <div class="card-body">
+      <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
+      <p class="card-text">
+        <span class="row">
+          <span class="col-sm-8">
+            <%= listing.category %>
+          </span>
+          <span class="col-sm-4">
+            <strong>$<%= listing.unit_price %> each</strong>
+          </span>
+        </span>
+        <p><small><%= listing.description %></small></p>
+      </p>
+    </div>
+
   </div>
-<% end %>
+  <% end %>
+</div>
+

@@ -1,13 +1,15 @@
 
 <div class ="container" style="background-color: #F0F0F0; padding-top: 20px">
 
+  <!-- TOP RACK - LISTING DETAILS (PHOTO, PRICE, DESC) -->
+
   <div class="row">
 
     <div class="image col-lg-6">
       <% if @listing.photo.attached? %>
       <%= cl_image_tag @listing.photo.key, height: 300, width: 400%>
       <% else %>
-     <img class="image" src="https://source.unsplash.com/400x300/?vegetables"/>
+      <img class="image" src="https://source.unsplash.com/400x300/?vegetables"/>
       <% end %>
     </div>
 
@@ -56,53 +58,74 @@
     </div>
   </div>
 
+  <!-- MIDDLE RACK -1 - MEET THE GROCER (DETAILS, OTHER LISTINGS) -->
+
   <div class="row d-block">
     <div class="col-lg-12" style="margin-top: 20px">
       <h5><strong>Meet the Grocer</strong></h5>
+
       <div class="card-product-big-avatar" style="min-height: 200px">
         <% user = User.find(@listing.user_id) %>
-        <% if user.avatar.attached? %>
-         <img class="image" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=user.avatar.key %>" href="/listing">
-         <% else %>
-           <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" />
-        <% end %>
+        <%= render "shared/user-avatar", user: user %>
+
         <div class="col-lg-12" style="background-color: white; border: grey 1px; margin-left: 10px">
           <% user = User.find(@listing.user_id) %>
-          <h6><strong>Name: </strong><%= user.username %></h6>
-          <h6><strong>Contact: </strong><%= user.email %></h6>
-          <h6><strong>Address: </strong><%= user.address %></h6>
+          <p><strong>Name: </strong><%= user.username %></p>
+          <p><strong>Contact: </strong><%= user.email %></p>
+          <p><strong>Address: </strong><%= user.address %></p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row" style="margin-bottom: 300px">
+  <div class="row">
 
     <div class="col-lg-12" style="margin-top: 20px">
-      <h5><strong>You may also like these</strong></h5>
+      <h5>You may also like these</h5>
+    </div>
+
+    <div class="col-lg-12" style="margin-top: 20px">
+
       <div class="cards-small">
         <% user = User.find(@listing.user_id) %>
         <% listings = Listing.where(user_id: @listing.user_id).limit(5) %>
         <% listings.each do |listing| %>
         <div class="card-small">
-          <% if listing.photo.attached? %>
-            <img class="card-small-img-top" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
-          <% else %>
-            <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
-          <% end %>
+          <%= render "shared/listing-image", listing: listing %>
+
           <div class="card-small-body" style="vertical-align: text-bottom;">
-          <strong><%= link_to listing.title, listing_path(listing) %></strong>
-          <div class="card-small-text">
-            <small><%= listing.category %></small>
-            <p>$<%= listing.unit_price %></p>
+            <strong><%= link_to listing.title, listing_path(listing) %></strong>
+            <div class="card-small-text">
+              <small><%= listing.category %></small>
+              <p>$<%= listing.unit_price %></p>
+            </div>
           </div>
         </div>
+        <% end %>
       </div>
-      <% end %>
     </div>
   </div>
 
-</div>
+  <!-- MIDDLE RACK -2 - SAME CATEGORY, OTHER LISTINGS -->
+
+  <div class="row">
+    <div class="col-lg-12" style="margin-top: 20px">
+      Simliar listings for:   <%= @listing.category %>
+    </div>
+
+    <div class="row" style="padding: 12px">
+      <div class="col-lg 12">
+        <div class="cards-small">
+          <% Listing.where(category: @listing.category).limit(5).each do |listing| %>
+          <div class="card-small">
+            <%= render "shared/listing-image", listing: listing %>
+            <%= render "shared/cards-of-5-rack", listing: listing %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 

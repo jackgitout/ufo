@@ -17,14 +17,14 @@
       <%= f.hidden_field :order_item_ids, multiple: true, value: oi.id %>
       <% end %>
       <div class="col-sm-12" style="background-color: grey; text-align: right; padding:8px">
-        <h5>
+        <h6>
           TOTAL AMOUNT:
           <% total = 0 %>
           <% @order_items.each do |item| %>
-          <% total +=item.amount%>
+          $ <% total +=item.amount%>
           <% end %>
           <%= total %>
-        </h5>
+        </h6>
       </div>
       <%= f.submit "Checkout", method: :create, class: "btn btn-danger w-100" %>
       <% end %>

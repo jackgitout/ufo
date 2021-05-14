@@ -25,7 +25,7 @@
         </li>
         <li class="nav-item dropdown ml-3">
           <% if current_user.avatar.attached? %>
-          <img class="avatar dropdown-toggle" id="navbarDropdown" data=toggle:dropdown aria-haspopup=true aria-expanded=false src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=current_user.avatar.key %>">
+          <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup=true aria-expanded=false src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=current_user.avatar.key %>">
           <% else %>
           <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% end %>

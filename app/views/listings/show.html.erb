@@ -64,7 +64,7 @@
     <div class="col-lg-12" style="margin-top: 20px">
       <h5><strong>Meet the Grocer</strong></h5>
 
-      <div class="card-product-big-avatar" style="min-height: 200px">
+      <div class="card-product-big-avatar" style="min-height: 200px; border-radius: 5px">
         <% user = User.find(@listing.user_id) %>
         <%= render "shared/user-avatar", user: user %>
 
@@ -116,7 +116,7 @@
     <div class="row" style="padding: 12px">
       <div class="col-lg 12">
         <div class="cards-small">
-          <% Listing.where(category: @listing.category).limit(5).each do |listing| %>
+          <% Listing.all.where(category: @listing.category).limit(5).each do |listing| %>
           <div class="card-small">
             <%= render "shared/listing-image", listing: listing %>
             <%= render "shared/cards-of-5-rack", listing: listing %>

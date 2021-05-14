@@ -48,12 +48,12 @@ class ListingsController < ApplicationController
   def update
     @listing.user = current_user
     @listing.update(listing_params)
-    redirect_to listings_path(@listing)
+    redirect_to my_listings_path
   end
 
   def destroy
     @listing.destroy
-    redirect_to listings_path
+    redirect_to my_listings_path
   end
 
   private

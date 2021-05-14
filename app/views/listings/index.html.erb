@@ -2,10 +2,11 @@
 <!-- MIDDLE RACK - 6 featured listings -->
 
 <div class="row">
+   <%if @listings == false %>
+    Nope
+    <%else%>
   <div class="col-sm-12">
-
     <div class="cards">
-      <% if @listings %>
       <% @listings.sample(6).each do |listing| %>
 
       <div class="card">
@@ -39,10 +40,9 @@
 
       </div>
       <% end %>
-      <% else %>
         </div>
-      <% end %>
     </div>
+    <%end%>
 
     <%= render "shared/editorial" %>
 

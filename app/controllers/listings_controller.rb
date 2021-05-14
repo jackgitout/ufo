@@ -12,12 +12,13 @@ class ListingsController < ApplicationController
     # if params[:category]
     #   @listings.where(category: params[:category])
     # end
-
+    @listingsall = Listing.all
     @listings = Listing.by_query(params[:search_query]).by_category(params[:category])
   end
 
   def show
     # using the set_listing
+    @listingsall = Listing.all
     @order_item = OrderItem.new
   end
 

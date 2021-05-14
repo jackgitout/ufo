@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.status = true if params[:order][:order_item_ids].any?
     if @order.save
       params[:order][:order_item_ids].each do |id|
         oi = OrderItem.find(id)
@@ -17,7 +18,12 @@ class OrdersController < ApplicationController
         listing.quantity = listing.quantity - oi.quantity
         listing.save!
       end
-      redirect_to @order
+      redirect_to order_path(@order)
+    else
+      @order_items = params[:order][:order_item_ids].map do |id|
+        OrderItem.find(id)
+      end
+      render 'order_items/my_cart'
     end
   end
 

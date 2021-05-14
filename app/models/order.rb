@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items 
 
-  # validates :total, numericality: { greater_than: 0, message: "Opps, there are nothing in your transaction." }
+  validates :status, inclusion: { in: [true], message: "Opps, there are nothing in your transaction." }
 
   def total_amounts
     total = 0

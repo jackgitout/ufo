@@ -9,7 +9,7 @@
   <div class="col-sm-12" style="margin-top: 20px">
     <h6>Your ordered items:</h6>
     <% @order.order_items.each do |item| %>
-    <%= render "card-products", item: item %>
+    <%= render "shared/card-product", item: item %>
      <% end %>
 
     <div class="col-sm-12" style="background-color: grey; text-align: right; padding:8px">

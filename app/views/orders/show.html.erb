@@ -9,8 +9,36 @@
   <div class="col-sm-12" style="margin-top: 20px">
     <h6>Your ordered items:</h6>
     <% @order.order_items.each do |item| %>
-    <%= render "shared/card-product", item: item %>
-     <% end %>
+    <div class="card-product">
+      <% if item.listing.photo.attached? %>
+      <img src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=item.listing.photo.key %>" />
+      <% else %>
+      <% end %>
+      <div class="card-product-infos d-flex flex-column flex-grow-1">
+        <div class="row d-flex flex-row justify-content-between align-items-center px-3">
+          <h2><%= item.listing.title %></h2>
+          <div class="box">
+            <p>Quantity: <%= item.quantity %></p>
+            <p>Unit Price: $<%= item.listing.unit_price %></p>
+            <p><strong>Sub Total: $<%= item.amount %></strong></p>
+          </div>
+        </div>
+        <div class="row d-flex flex-row justify-content-between align-items-end px-3">
+          <div class="box">
+            <p>Category: <%= item.listing.category %></p>
+            <p>Seller: <%= item.listing.user.username %></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    <% end %>
 
     <div class="col-sm-12" style="background-color: grey; text-align: right; padding:8px">
       <h5>TOTAL AMOUNT: $<%= @order.total_amounts %></h5>
@@ -52,7 +80,7 @@
       </div>
     </div>
 
-<% end %>
+    <% end %>
   </div>
 </div>
 

@@ -1,52 +1,46 @@
-<%= render "shared/banner" %>
+<%= render “shared/banner” %>
 <!-- MIDDLE RACK - 6 featured listings -->
-
-<div class="row">
+<div class=“row”>
+  <div class=“col-sm-12”>
    <% if @listings.count == 0 %>
-   <div class="col-sm-12" style="display: block; color: grey; text-align: center; padding: 100px">
+   <div class=“col-sm-12" style=“display: block; color: grey; text-align: center; padding: 100px”>
     <h5>No listings available</h5>
     <h5>Try again!</h5>
   </div>
   <%else%>
-  <div class="cards">
-
+  <div class=“cards”>
     <% @listings.sample(6).each do |listing| %>
-
-    <div class="card">
-
-      <div class="row" style="padding: 4px; align-items: center">
-        <div class="col-sm-7">
+    <div class=“card”>
+      <div class=“row” style=“padding: 4px; align-items: center”>
+        <div class=“col-sm-7">
           <% user = User.find(listing.user_id) %>
-          <%= render "shared/user-avatar", user: user %>
+          <%= render “shared/user-avatar”, user: user %>
           <small><%= user.username %></small>
         </div>
-        <div class="col-sm-5">
+        <div class=“col-sm-5">
           <small>Order by:<%= listing.expiry_date %></small>
         </div>
       </div>
-
-      <%= render "shared/listing-image", listing: listing %>
-      <div class="card-body">
-        <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
-        <p class="card-text">
-          <span class="row">
-            <span class="col-sm-8">
+      <%= render “shared/listing-image”, listing: listing %>
+      <div class=“card-body”>
+        <h5 class=“card-title”><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
+        <p class=“card-text”>
+          <span class=“row”>
+            <span class=“col-sm-8">
               <%= listing.category %>
             </span>
-            <span class="col-sm-4">
+            <span class=“col-sm-4”>
               <strong>$<%= listing.unit_price %> each</strong>
             </span>
           </span>
           <p><small><%= listing.description %></small></p>
         </p>
       </div>
-      <% end %>
-        </div>
     </div>
-    <%end%>
-
-<%= render "shared/editorial" %>
-
+    <% end %>
+  </div>
+  <% end %>
 </div>
-
-
+<%= render “shared/editorial” %>
+</div>
+</div>

@@ -13,7 +13,7 @@ puts 'destroy old data'
 
 User.destroy_all
 
-2.times do
+6.times do
   user = User.new(
     username: Faker::Name.unique.name,
     email: Faker::Internet.email,
@@ -27,7 +27,7 @@ User.destroy_all
 end
 
 User.all.each do |user|
-  3.times do
+  2.times do
     listing = Listing.new(
       title: Faker::Food.vegetables,
       description: Faker::Food.description,

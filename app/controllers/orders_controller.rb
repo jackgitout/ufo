@@ -5,7 +5,19 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+
+    @seller = @order.order_items.limit(1).map do |item|
+      User.find(item.listing.user_id)
+    end
+
+    @markers =
+      [{
+        lat: @seller[0].latitude,
+        lng: @seller[0].longitude
+      }]
   end
+
+
 
   def create
     @order = Order.new(order_params)
@@ -35,7 +47,7 @@ class OrdersController < ApplicationController
 
   def validate_order_status(params)
     status = false
-    
+
     # iterate through order_ids and groups order_ids that have the same listing_id
     oi = params[:order][:order_item_ids].map do |id|
       id.to_i
@@ -47,8 +59,8 @@ class OrdersController < ApplicationController
     grouped = order_items.group_by { |el| el.listing_id }
     # grouped returns a key and value. key = listing_id value = order_item
     # iterates through grouped hash and generate an array of listing_id with summed quantity
-    grouped_quantity = grouped.map do |listing_id, order_arr| 
-      [listing_id, order_arr.sum(&:quantity)] 
+    grouped_quantity = grouped.map do |listing_id, order_arr|
+      [listing_id, order_arr.sum(&:quantity)]
     end
     grouped_quantity.each do |arr|
       listing_original_quantity = Listing.find(arr[0]).quantity
@@ -57,8 +69,8 @@ class OrdersController < ApplicationController
         status = true
       else
         status = false
-      end    
-    end  
+      end
+    end
     return status
   end
 end

@@ -8,4 +8,7 @@ class User < ApplicationRecord
   has_many :listings, dependent: :destroy
   has_many :orders, through: :order_items
   has_one_attached :avatar
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end

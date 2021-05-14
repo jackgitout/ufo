@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   belongs_to :user
+  has_many :order_items, dependent: :destroy
   has_one_attached :photo
 
   validates :title, presence: true

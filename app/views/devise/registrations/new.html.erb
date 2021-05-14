@@ -24,15 +24,14 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "street address" }%>
-
+    <%= f.input :avatar, as: :file %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Sign up", class:"btn btn-success w-100" %>
   </div>
 <% end %>
 
 <%= render "devise/shared/links" %>
-
 
 </div>

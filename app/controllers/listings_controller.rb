@@ -6,14 +6,14 @@ class ListingsController < ApplicationController
     # if params[:search_query]
     #   @listings = Listing.where("title LIKE ?", "%#{params[:search_query].titleize}%")
     # else
-    #   @listings = Listing.all
+    #   @listings = Listing.where('quantity > 0')
     # end
 
     # if params[:category]
     #   @listings.where(category: params[:category])
     # end
-    @listingsall = Listing.all
-    @listings = Listing.by_query(params[:search_query]).by_category(params[:category])
+    @listingsall = Listing.all.where('quantity > 0')
+    @listings = Listing.by_query(params[:search_query]).by_category(params[:category]).where('quantity > 0')
   end
 
   def show
@@ -48,12 +48,12 @@ class ListingsController < ApplicationController
   def update
     @listing.user = current_user
     @listing.update(listing_params)
-    redirect_to listings_path(@listing)
+    redirect_to my_listings_path
   end
 
   def destroy
     @listing.destroy
-    redirect_to listings_path
+    redirect_to my_listings_path
   end
 
   private

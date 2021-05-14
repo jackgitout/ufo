@@ -33,10 +33,11 @@ class ListingsController < ApplicationController
   def create
     @listing = Listing.new(listing_params)
     @listing.user = current_user
-    if @listing.valid?
+    if @listing.valid? && acceptable_date_and_amount
       @listing.save
       redirect_to listings_path(@listing)
     else
+      flash.now[:notice] = "Something is wrong with your listing"
       render :new
     end
   end
@@ -46,9 +47,14 @@ class ListingsController < ApplicationController
   end
 
   def update
-    @listing.user = current_user
-    @listing.update(listing_params)
-    redirect_to my_listings_path
+    if @listing.valid? && acceptable_date_and_amount
+      @listing.user = current_user
+      @listing.update(listing_params)
+      redirect_to my_listings_path
+    else
+      flash.now[:notice] = "Something is wrong with your listing"
+      render :new
+    end
   end
 
   def destroy
@@ -69,5 +75,15 @@ class ListingsController < ApplicationController
 
   def set_listing
     @listing = Listing.find(params[:id])
+  end
+
+  def acceptable_date_and_amount
+
+    listing_date = Date.new(  params["listing"]["expiry_date(1i)"].to_i,
+                             params["listing"]["expiry_date(2i)"].to_i,
+                             params["listing"]["expiry_date(3i)"].to_i
+                      )
+    listing_params[:quantity].to_i.positive? &&
+    listing_date >= Date.today
   end
 end

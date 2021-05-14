@@ -116,7 +116,7 @@
     <div class="row" style="padding: 12px">
       <div class="col-lg 12">
         <div class="cards-small">
-          <% Listing.where(category: @listing.category).limit(5).each do |listing| %>
+          <% Listing.all.where(category: @listing.category).limit(5).each do |listing| %>
           <div class="card-small">
             <%= render "shared/listing-image", listing: listing %>
             <%= render "shared/cards-of-5-rack", listing: listing %>

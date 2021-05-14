@@ -16,7 +16,7 @@
   <div class="row" style="padding: 12px">
     <div class="col-lg 12">
       <div class="cards-small">
-        <% @listings.last(5).each do |listing| %>
+        <% @listingsall.last(5).each do |listing| %>
         <div class="card-small">
           <%= render "shared/listing-image", listing: listing %>
           <%= render "shared/cards-of-5-rack", listing: listing %>
@@ -42,7 +42,7 @@
   <div class="row" style="padding: 12px">
     <div class="col-lg 12">
       <div class="cards-small">
-        <% @listings.where(category: "Ready To Eat Salads").each do |listing| %>
+        <% @listingsall.where(category: "Ready To Eat Salads").each do |listing| %>
         <div class="card-small">
           <%= render "shared/listing-image", listing: listing %>
           <%= render "shared/cards-of-5-rack", listing: listing %>
@@ -64,7 +64,7 @@
   <div class="row" style="padding: 12px">
     <div class="col-lg 12">
       <div class="cards-small">
-        <% @listings.where(category: "Grow Your Own Microgreens").each do |listing| %>
+        <% @listingsall.where(category: "Grow Your Own Microgreens").each do |listing| %>
         <div class="card-small">
           <%= render "shared/listing-image", listing: listing %>
           <%= render "shared/cards-of-5-rack", listing: listing %>
@@ -88,7 +88,7 @@
     <h6>
       <strong>
         Crops from Super Grocer:
-        <% listing = @listings.last %>
+        <% listing = @listingsall.first %>
         <% user = User.find(listing.user_id) %>
         <%= user.username %>
       </strong>
@@ -99,9 +99,9 @@
   <div class="row" style="padding: 12px">
     <div class="col-lg 12" >
       <div class="cards-small">
-        <% listing = @listings.last %>
+        <% listing = @listingsall.first %>
         <% user = User.find(listing.user_id) %>
-        <% @listings.where(user_id: user).limit(5).each do |listing|%>
+        <% @listingsall.where(user_id: user).limit(5).each do |listing|%>
 
         <div class="card-small">
           <%= render "shared/listing-image", listing: listing %>

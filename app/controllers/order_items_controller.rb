@@ -9,7 +9,7 @@ class OrderItemsController < ApplicationController
   def create
     @order_item = OrderItem.new(order_item_params)
     # if the user already has this order item,
-    # add the amount in the params to the the order item
+     # add the amount in the params to the the order item
     # otherwise, create a new order item
     @order_item.listing = @listing
     @order_item.amount = @order_item.quantity * @order_item.listing.unit_price

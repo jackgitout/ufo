@@ -78,7 +78,6 @@ class ListingsController < ApplicationController
   end
 
   def acceptable_date_and_amount
-
     listing_date = Date.new(  params["listing"]["expiry_date(1i)"].to_i,
                              params["listing"]["expiry_date(2i)"].to_i,
                              params["listing"]["expiry_date(3i)"].to_i

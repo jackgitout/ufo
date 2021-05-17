@@ -1,29 +1,55 @@
-
-  <h2><%= current_user.username %>'s Listings</h2>
-
-  <div class="row">
-
-  <div class="card">
-
-        <% @listings.each do |listing| %>
-        <% if listing.photo.attached? %>
-         <img class="image" src="https://res.cloudinary.com/dcm2heeuf/image/upload/v1620723373/<%=listing.photo.key %>" href="/listing">
-         <% else %>
-          <img class="image" src="https://source.unsplash.com/400x300/?vegetables" />
-        <% end %>
-            <h5><%= link_to listing.title, listing_path(listing) %></h5>
-          <div class="options">
+<div class="row">
+  <div class="col-sm-12">
+   <% if @listings.count == 0 %>
+   <div class="col-sm-12" style="display: block; color: grey; text-align: center; padding: 100px">
+    <h5>You've yet to list any crops!</h5>
+  </div>
+  <%else%>
+  <div class="cards">
+    <% @listings.each do |listing| %>
+    <div class="card">
+      <div class="row" style="padding: 4px; align-items: center">
+        <div class="col-sm-12">
+          <small>Expiry: <%= listing.expiry_date %></small>
+        </div>
+      </div>
+      <%= render "shared/listing-image", listing: listing %>
+      <div class="card-body">
+        <h5 class="card-title"><strong><%= link_to listing.title, listing_path(listing) %></strong></h5>
+        <p class="card-text">
+          <span class="row">
+            <span class="col-sm-8">
+              <%= listing.category %><br>
+              <strong style="color: red">Quantity: <%= listing.quantity %> left</strong>
+            </span>
+            <span class="col-sm-4">
+              $<%= listing.unit_price %> each
+            </span>
+          </span>
+        </p>
+      </div>
+      <div class="row" style="margin: 5px; padding: 7px">
+        <div class="col-sm-6" style="text-align: center">
+          <div class="list-edit">
+            <%= link_to "Edit", edit_listing_path(listing), class:"bi bi-pen" %>
+          </div>
+        </div>
+        <div class="col-sm-6" style="text-align: center">
           <div class="list-delete">
             <%= link_to "Delete",
             listing_path(listing),
             method: :delete,
-            data: { confirm: "Are you sure?" } %>
+            data: { confirm: "Are you sure?" }, class:"bi bi-trash" %>
           </div>
-            <div class="list-edit">
-              <%= link_to "Edit", edit_listing_path(listing) %>
-            </div>
         </div>
-
-        <% end %>
       </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <a class="btn btn-success w-100" href="/listings/new" style="margin-top:20px">List more crops!</a>
 </div>
+</div>
+
+
+

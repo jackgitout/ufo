@@ -17,8 +17,6 @@ class OrdersController < ApplicationController
       }]
   end
 
-
-
   def create
     @order = Order.new(order_params)
     @order.status = true if (validate_order_status(params) == true)
@@ -35,7 +33,7 @@ class OrdersController < ApplicationController
       @order_items = params[:order][:order_item_ids].map do |id|
         OrderItem.find(id)
       end
-      flash.now[:notice] = "We dont have that much available"
+      flash.now[:notice] = "We don't have that much available"
       render 'order_items/my_cart'
     end
   end

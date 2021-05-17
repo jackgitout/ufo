@@ -37,7 +37,7 @@ class ListingsController < ApplicationController
       @listing.save
       redirect_to listings_path(@listing)
     else
-      flash.now[:notice] = "Something is wrong with your listing"
+      flash.now[:notice] = "Your listing is incomplete, please try again!"
       render :new
     end
   end

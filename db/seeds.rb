@@ -38,7 +38,7 @@ User.all.each do |user|
       user: user
     )
     puts "creating listing: #{listing.title}"
-    file = URI.open("https://source.unsplash.com/400x300/?#{listing.title}")
+    file = URI.open("https://source.unsplash.com/400x300/?vegetable,#{listing.title}")
     listing.photo.attach(io: file, filename: "#{listing.title}.png", content_type: 'image/png')
     listing.save!
   end

@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.status = true if (validate_order_status(params) == true)
-    if @order.status == true && @order.save
+    if  @order.status == true && @order.save
       params[:order][:order_item_ids].each do |id|
         oi = OrderItem.find(id)
         oi.order = @order

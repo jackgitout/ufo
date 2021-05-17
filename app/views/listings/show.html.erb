@@ -37,11 +37,11 @@
       </div>
 
       <div class="row" style="margin-top: 20px; margin-bottom: 30px">
-        <div class="col-sm-12" data-controller="quantity">
-          <%= simple_form_for([ @listing, @order_item ], data: { action: "quantity#refresh"}) do |f| %>
-          <%= f.input :quantity, collection: 1..@listing.quantity, prompt: false, label: "Select Quantity", input_html: { 'data-quantity-target': 'input'  } %>
-          <%= f.submit "Add To Cart", method: :create, data: { disable_with: false } %>
-          <small data-quantity-target="count" data-amount-left="<%= @listing.quantity %>">(Quantity left: <%=@listing.quantity%>)</small>
+        <div class="col-sm-12">
+          <%= simple_form_for([ @listing, @order_item ]) do |f| %>
+          <%= f.input :quantity, collection: 1..@listing.quantity, prompt: false, label: "Select Quantity" %>
+          <%= f.submit "Add To Cart", method: :create %>
+          <small>(Quantity left: <%=@listing.quantity%>)</small>
           <% end %>
         </div>
 

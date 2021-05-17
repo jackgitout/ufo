@@ -29,8 +29,8 @@ end
 User.all.each do |user|
   2.times do
     listing = Listing.new(
-      title: Faker::Food.vegetables,
-      description: Faker::Food.description,
+      title: ["Spinach", "Carrots", "Broccoli", "Brussels Sprouts", "Green Peas", "Ginger", "Asparagus", "Cabbage", "Potatoes", "Turnip", "Capsicum", "Eggplant", "Bok Choy", "Radish", "Onion", "Celery", "Lettuce", "Artichoke", "Cauliflower","Avocado", "Cucumber"].sample,
+      description: ["This leafy tops the chart as one of the healthiest vegetables, thanks to its impressive nutrient profile.", "Veggie packed with vitamin A","Belongs to the cruciferous family of vegetables, Eating this veggie may help prevent other types of chronic disease, too.", "A long history of use as a medicinal plant,with roots tracing all the way back to ancient China and Egypt.", "Like other leafy greens, this veggie is well-known for its health-promoting qualities, including its nutrient density and antioxidant content.", "They are considered a starchy vegetable. This means they have a higher amount of carbs and calories than non-starchy vegetables and may impact blood sugar levels when eaten in large amounts.", "This spring vegetable is rich in several vitamins and minerals, making it an excellent addition to any diet.", "This vegetable belongs to the cruciferous family of vegetables and, much like its relatives, is brimming with antioxidants and health-promoting properties.", "This veggie stands out for their vibrant color, sweet taste and impressive health benefits."].sample,
       category: ["Fresh Vegetables", "Frozen Vegetables", "Ready To Eat Salads", "Grow Your Own Microgreens", "Other Vegetables"].sample,
       quantity: (1..10).to_a.sample,
       unit_price:(1..10).to_a.sample,
@@ -38,7 +38,7 @@ User.all.each do |user|
       user: user
     )
     puts "creating listing: #{listing.title}"
-    file = URI.open("https://source.unsplash.com/400x300/?#{listing.title}")
+    file = URI.open("https://source.unsplash.com/400x300/?vegetable,#{listing.title}")
     listing.photo.attach(io: file, filename: "#{listing.title}.png", content_type: 'image/png')
     listing.save!
   end
